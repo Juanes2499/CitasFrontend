@@ -1,0 +1,39 @@
+body {
+	background-color: rgb(129, 129, 129);
+}
+
+.o-container-login {
+	background-color: rgb(187, 186, 186);
+	height: 100%;
+	margin: 0 auto;
+	width: 100%;
+	overflow: hidden;
+}
+
+.o-login-form {
+	height: 24rem;
+	width: 22rem;
+	border-radius: 0.8rem;
+	padding: 3rem 2rem 3rem 2rem;
+}
+
+.o-login-btn {
+	border-radius: 2rem;
+	padding: 0.6rem 1rem;
+	border: none;
+	width: 15rem;
+	background: rgb(32, 21, 231);
+	background: linear-gradient(90deg, rgba(32, 21, 231, 1) 0%, rgba(15, 223, 221, 1) 100%);
+}
+
+.o-password-button {
+	position: fixed;
+	width: 18rem;
+	z-index: 2;
+	background-color: khaki;
+	visibility: hidden;
+}
+
+.o-toggle-pass-button {
+	visibility: visible;
+}

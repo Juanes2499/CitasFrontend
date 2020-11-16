@@ -1,0 +1,12 @@
+.o-navbar {
+	background-color: black;
+	text-align: center;
+	padding: 0.8rem 3rem;
+}
+.o-navbar-links {
+	color: rgb(95, 94, 94);
+}
+.o-navbar-links:hover {
+	background-color: whitesmoke;
+	border-radius: 4px;
+}
