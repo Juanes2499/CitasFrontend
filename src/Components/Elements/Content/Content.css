@@ -7,48 +7,8 @@ a:focus {
 }
 
 /* ---------------------------------------------------
-      SIDEBAR STYLE
+      CONTENT STYLE
   ----------------------------------------------------- */
-.sidebar {
-	min-width: 250px;
-	max-width: 250px;
-	background: #202a5b;
-	color: #fff;
-	margin-left: -250px;
-	transition: all 0.5s;
-}
-
-.sidebar.is-open {
-	margin-left: 0;
-	transition: 0.5s;
-}
-
-.sidebar-header h3 {
-	color: #fff;
-	padding-left: 0;
-	padding: 1rem;
-	text-align: center;
-}
-
-.items-menu {
-	color: #fff;
-}
-
-li a.dropdown-toggle::after {
-	display: inline-flex;
-	position: relative;
-	left: 60%;
-	top: 10%;
-}
-
-.sidebar-header > span {
-	position: relative;
-	float: right;
-	margin: 0.5em;
-	font-size: 2rem;
-	cursor: pointer;
-	display: none;
-}
 .content::-webkit-scrollbar {
 	width: 10px;
 }
@@ -63,9 +23,6 @@ li a.dropdown-toggle::after {
 	background: #3a4c99;
 }
 
-/* ---------------------------------------------------
-      CONTENT STYLE
-  ----------------------------------------------------- */
 .content {
 	padding: 0px 20px;
 	overflow-y: auto;
@@ -74,6 +31,9 @@ li a.dropdown-toggle::after {
 }
 .o-navbar {
 	padding: 0.8rem 3rem;
+}
+.o-close-button {
+	padding: 0.8rem;
 }
 @media only screen and (max-width: 800px) {
 	.sidebar.is-open {

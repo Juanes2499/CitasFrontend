@@ -1,14 +1,14 @@
 import React, { useState, useRef, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./AccordionStyles.css";
-import {
-  faPlus, faMinus } from "@fortawesome/free-solid-svg-icons";
+import { faPlus, faMinus, faWrench } from "@fortawesome/free-solid-svg-icons";
+
 const Accordion = (props) => {
-  const [active, setActive] = useState(false);
+  const [active, setActive] = useState(true);
   const contentRef = useRef(null);
-  
+
   var activeTitle = "";
-  useEffect(() => { 
+  useEffect(() => {
     contentRef.current.style.maxHeight = active
       ? `500px`
       : "0px";
@@ -19,7 +19,7 @@ const Accordion = (props) => {
     console.log(active);
     activeTitle = props.title;
     console.log(activeTitle);
-    
+
   };
 
   const titleStyle = {
@@ -28,15 +28,17 @@ const Accordion = (props) => {
   };
 
   return (
-    <div className= " accordion-section" >
-      <button className="accordion-title" onClick={toogleActive}>
-        <p style={titleStyle}>{props.title}</p>
-        <span className={active ? "accordion-icon rotate" : "accordion-icon"}>
-        <FontAwesomeIcon icon={active ? faMinus: faPlus } className="mr-2 rotated" />
+    <div className="accordion-section" >
+      <div button className="accordion-title bg-primary p-2 text-white" >
+        <p className="mt-3" style={titleStyle}> <FontAwesomeIcon icon={faWrench} className="mr-2 rotated" />{props.title}</p>
+        <span className="ml-auto">
+          <button type="submit" className="btn btn-warning z-depth-0 p-2 text-dark m-0 text-right align-middle mr-1 ml-1">Actualizar datos</button>
+          <button type="submit" className="btn btn-danger z-depth-0 p-2 text-white m-0 text-right align-middle mr-2 ml-1">Eliminar nodo</button>
+          <FontAwesomeIcon icon={active ? faMinus : faPlus} onClick={toogleActive} className={active ? "accordion-icon" : "accordion-icon mr-2 rotated"} />
         </span>
-      </button>
+      </div>
 
-      <div ref={contentRef}   className={(active ? "show-" : "") + "accordion-content " }>
+      <div ref={contentRef} className={(active ? "show-" : "") + "accordion-content p-0 m-0"}>
         {props.children}
       </div>
     </div>

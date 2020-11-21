@@ -2,6 +2,14 @@ import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAlignLeft, faAlignRight } from "@fortawesome/free-solid-svg-icons";
 
+const deleteUser = (props) => {
+  localStorage.setItem(
+    "login",
+    ""
+  );
+
+  console.log(localStorage.getItem("login"))
+}
 const Topbar = ({ toggleSidebar }, props) => {
   const [topbarIsOpen, setTopbarOpen] = useState(true);
   const toggleTopbar = () => setTopbarOpen(!topbarIsOpen);
@@ -9,13 +17,13 @@ const Topbar = ({ toggleSidebar }, props) => {
   return (
     <nav className="navbar  sticky-top shadow-sm p-3 mb-5 grey lighten-5 navbar-expand-sm o-nav  rounded">
       <button
-        className="btn p-0 btn-primary  btn-lg text-light   rounded  o-btns"
+        className="btn p-0 btn-primary z-depth-0  btn-lg text-light   rounded  o-btns"
         onClick={toggleSidebar}
       >
         <FontAwesomeIcon icon={faAlignLeft} />
       </button>
       <button
-        className="navbar-toggler btn btn-light btn-lg text-secondary border   p-3 rounded o-btns   "
+        className="navbar-toggler btn btn-light z-depth-0 btn-lg text-secondary border   p-3 rounded o-btns   "
         data-toggle="collapse"
         aria-label="Toggle navigation"
         onClick={toggleTopbar}
@@ -27,7 +35,7 @@ const Topbar = ({ toggleSidebar }, props) => {
           } navbar-collapse justify-content-lg-end`}
         id="navbar-menu"
       >
-        <a className="nav-link text-info" href="/Dashboard/InfoUser">Foto perfil</a>
+        <button className="btn o-close-button btn-danger" onClick={deleteUser} ><a className="" href="/Login">Cerrar sesión</a></button>
       </div>
     </nav>
   );
