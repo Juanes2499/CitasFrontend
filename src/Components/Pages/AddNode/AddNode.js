@@ -19,7 +19,7 @@ class AddNode extends Component {
                     <div className="card-header bg-primary text-white d-flex ">
                         <FontAwesomeIcon icon={faPlus} className="m-0  align-middle mr-2" />
                         <p className="m-0 align-middle">Agregar nodo sensor</p>
-                        <button type="submit" className="btn btn-success p-2 text-white  z-depth-0 m-0 text-right align-middle ml-auto">Agregar nodo</button>
+                        <button className="btn btn-success p-2 text-white  z-depth-0 m-0 text-right align-middle ml-auto">Agregar nodo</button>
                     </div>
                     <div className="card-body">
                         <p className="h6 font-weight-bold text-muted">Identificación del nodo</p>
