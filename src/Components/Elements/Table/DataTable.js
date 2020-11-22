@@ -13,6 +13,63 @@ const DataTable = ({ tableData, headingColumns }) => {
                 clase = "danger-color";
             }
         }
+        if (heading === "Temperatura") {
+            if (value > 30) {
+                clase = "danger-color";
+            } else if (value >= 16) {
+                clase = "warning-color";
+            } else {
+                clase = "success-color";
+            }
+        } else if (heading === "Humedad") {
+            if (value < 35) {
+                clase = "danger-color";
+            } else if (value >= 35 && value <= 70) {
+                clase = "warning-color";
+            } else {
+                clase = "success-color";
+            }
+} else if (heading === "VelocidadViento") {
+            if (value > 28) {
+                clase = "danger-color";
+            } else if (value >= 20 && value <= 28) {
+                clase = "warning-color";
+            } else {
+                clase = "success-color";
+            }
+        } else if (heading === "Temperatura Agua") {
+            if (value > 30) {
+                clase = "danger-color";
+            } else if (value >= 16 && value <= 30) {
+                clase = "warning-color";
+            } else {
+                clase = "success-color";
+            }
+        } else if (heading === "Nivel Agua") {
+            if (value > 7) {
+                clase = "danger-color";
+            } else if (value >= 4 && value <= 7) {
+                clase = "warning-color";
+            } else {
+                clase = "success-color";
+            }
+        } else if (heading === "Caudal") {
+            if (value > 4) {
+                clase = "danger-color";
+            } else if (value >= 2 && value <= 4){
+                clase = "warning-color";
+            } else {
+                clase = "success-color";
+            }
+        } else if (heading === "Flujo"){
+            if (value > 4) {
+                clase = "danger-color";
+            } else if (value >= 2 && value <= 4){
+                clase = "warning-color";
+            } else {
+                clase = "success-color";
+            }
+        }
         return clase;
     }
     const data = tableData.map((row, index) => {

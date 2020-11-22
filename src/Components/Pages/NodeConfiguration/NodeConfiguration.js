@@ -1,12 +1,21 @@
 import React, { Component } from "react";
 import { MDBProgress } from 'mdbreact';
 import Accordion from "../../Elements/Accordion/Accordion";
+import NodeMap from "../../Elements/Map/NodeMap";
 
 class NodeConfig extends Component {
 
     render() {
         return (
-            <div className="container ">
+            <div >
+                <div className="row  mt-0">
+                    <p className="h5 font-weight-bold mt-0 text-muted">Bienvenido a Smart Cities UAO</p>
+                </div>
+                <div className="row h-25 mb-4 d-flex justify-content-center mt-0">
+                    <div className="col-12 col-sm-8">
+                        <NodeMap />
+                    </div>
+                </div>
                 <div className="row  d-flex justify-content-center">
                     <div className="col-sm-8">
                         <div className="card p-0">

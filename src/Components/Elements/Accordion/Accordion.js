@@ -30,11 +30,11 @@ const Accordion = (props) => {
   return (
     <div className="accordion-section" >
       <div button className="accordion-title bg-primary p-2 text-white" >
-        <p className="mt-3" style={titleStyle}> <FontAwesomeIcon icon={faWrench} className="mr-2 rotated" />{props.title}</p>
+        <p className="mt-3 ml-1" style={titleStyle}> <FontAwesomeIcon icon={faWrench} className="mr-2 rotated" />{props.title}</p>
         <span className="ml-auto">
           <button type="submit" className="btn btn-warning z-depth-0 p-2 text-dark m-0 text-right align-middle mr-1 ml-1">Actualizar datos</button>
           <button type="submit" className="btn btn-danger z-depth-0 p-2 text-white m-0 text-right align-middle mr-2 ml-1">Eliminar nodo</button>
-          <FontAwesomeIcon icon={active ? faMinus : faPlus} onClick={toogleActive} className={active ? "accordion-icon" : "accordion-icon mr-2 rotated"} />
+          <FontAwesomeIcon icon={active ? faMinus : faPlus} onClick={toogleActive} className={active ? "accordion-icon" : "accordion-icon mr-3 rotated"} />
         </span>
       </div>
 

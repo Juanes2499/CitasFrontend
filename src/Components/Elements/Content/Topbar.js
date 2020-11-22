@@ -22,20 +22,11 @@ const Topbar = ({ toggleSidebar }, props) => {
       >
         <FontAwesomeIcon icon={faAlignLeft} />
       </button>
-      <button
-        className="navbar-toggler btn btn-light z-depth-0 btn-lg text-secondary border   p-3 rounded o-btns   "
-        data-toggle="collapse"
-        aria-label="Toggle navigation"
-        onClick={toggleTopbar}
-      >
-        <FontAwesomeIcon icon={faAlignRight} />
-      </button>
       <div
-        className={`${topbarIsOpen ? "collapse" : ""
-          } navbar-collapse justify-content-lg-end`}
+        className=" ml-auto justify-content-lg-end"
         id="navbar-menu"
       >
-        <button className="btn o-close-button btn-danger" onClick={deleteUser} ><a className="" href="/Login">Cerrar sesión</a></button>
+        <button className="btn m-0 o-close-button z-depth-0 btn-danger" onClick={deleteUser} ><a className="" href="/Login">Cerrar sesión</a></button>
       </div>
     </nav>
   );
