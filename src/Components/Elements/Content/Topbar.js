@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAlignLeft, faAlignRight } from "@fortawesome/free-solid-svg-icons";
+import { faAlignLeft } from "@fortawesome/free-solid-svg-icons";
 
 const deleteUser = (props) => {
   localStorage.setItem(
@@ -11,8 +11,6 @@ const deleteUser = (props) => {
   console.log(localStorage.getItem("login"))
 }
 const Topbar = ({ toggleSidebar }, props) => {
-  const [topbarIsOpen, setTopbarOpen] = useState(true);
-  const toggleTopbar = () => setTopbarOpen(!topbarIsOpen);
 
   return (
     <nav className="navbar  sticky-top shadow-sm p-3 mb-5 grey lighten-5 navbar-expand-sm o-nav  rounded">

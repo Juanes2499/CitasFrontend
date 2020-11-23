@@ -29,7 +29,7 @@ const DataTable = ({ tableData, headingColumns }) => {
             } else {
                 clase = "success-color";
             }
-} else if (heading === "VelocidadViento") {
+} else if (heading === "Velocidad del viento") {
             if (value > 28) {
                 clase = "danger-color";
             } else if (value >= 20 && value <= 28) {
@@ -37,7 +37,7 @@ const DataTable = ({ tableData, headingColumns }) => {
             } else {
                 clase = "success-color";
             }
-        } else if (heading === "Temperatura Agua") {
+        } else if (heading === "Temperatura del río") {
             if (value > 30) {
                 clase = "danger-color";
             } else if (value >= 16 && value <= 30) {
@@ -45,7 +45,7 @@ const DataTable = ({ tableData, headingColumns }) => {
             } else {
                 clase = "success-color";
             }
-        } else if (heading === "Nivel Agua") {
+        } else if (heading === "Nivel de agua") {
             if (value > 7) {
                 clase = "danger-color";
             } else if (value >= 4 && value <= 7) {
@@ -82,7 +82,7 @@ const DataTable = ({ tableData, headingColumns }) => {
             });
             i++;
         }
-        console.log(rowData);
+        //console.log(rowData);
         return <tr key={index}>
             {rowData.map((data, index) => <td key={index} className={clases(data.key,data.val)} data-heading={data.key}>{data.val}</td>)}
         </tr>;

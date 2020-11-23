@@ -6,8 +6,6 @@ import { faPlus, faMinus } from "@fortawesome/free-solid-svg-icons";
 const Accordion3 = (props) => {
     const [active, setActive] = useState(true);
     const contentRef = useRef(null);
-
-    var activeTitle = "";
     useEffect(() => {
         contentRef.current.style.maxHeight = active
             ? `500px`
@@ -16,10 +14,7 @@ const Accordion3 = (props) => {
 
     const toogleActive = () => {
         setActive(!active);
-        console.log(active);
-        activeTitle = props.title;
-        console.log(activeTitle);
-
+        
     };
 
     const titleStyle = {
@@ -29,10 +24,10 @@ const Accordion3 = (props) => {
 
     return (
         <div className="accordion-section" >
-            <div button className={props.color + " accordion-title p-2 text-white"} >
-                <p className="mt-3" style={titleStyle}> <FontAwesomeIcon icon={props.icon} className="mr-2 " />{props.title}</p>
+            <div className={props.color + " accordion-title p-0 text-white"} >
+                <p className="mt-3 ml-3" style={titleStyle}> <FontAwesomeIcon icon={props.icon == null ? faMinus : props.icon} className={(props.icon == null ? "invisible fixed-top " : "") +"mr-2 "} />{props.title}</p>
                 <span className="ml-auto">
-                    <FontAwesomeIcon icon={active ? faMinus : faPlus} onClick={toogleActive} className={active ? "accordion-icon" : "accordion-icon mr-2 rotated"} />
+                    <FontAwesomeIcon icon={active ? faMinus : faPlus} onClick={toogleActive} className={(active ? "accordion-icon " : "accordion-icon rotated ") + "mr-3"} />
                 </span>
             </div>
 

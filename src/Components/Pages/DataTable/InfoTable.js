@@ -3,305 +3,129 @@ import DataTable from "../../Elements/Table/DataTable";
 class InfoTable extends Component {
     constructor(props) {
         super(props);
+        this.searchNode = this.searchNode.bind(this);
         this.state = {
-            climateDate: [
+            selectedNode: "",
+            lat: "",
+            long: "",
+            optionNodes: [
+                { node: 1 }, { node: 2 }, { node: 3 }, { node: 4 }]
+            ,
+            rawData: [
                 {
+                    lat: "1",
+                    long: "2",
                     idNodo: 1,
                     temperature: 16,
-                    humedad: 25,
-                    velocidadViento: 25,
-                    direccionViento: "N",
-                    Fecha: "2020-03-11",
-                    Hora: "11:53:02"
-
+                    temperatureWater: 14,
+                    levelRiver: 25,
+                    flow: 25,
+                    caudal: 25,
+                    humidity: 25,
+                    windSpeed: 25,
+                    windDirection: "N",
+                    date: "2020-03-11",
+                    hour: "11:53:02"
                 },
                 {
+                    lat: "1",
+                    long: "2",
                     idNodo: 1,
                     temperature: 16,
-                    humedad: 25,
-                    velocidadViento: 25,
-                    direccionViento: "N",
-                    Fecha: "2020-03-11",
-                    Hora: "11:53:02"
-
+                    temperatureWater: 14,
+                    levelRiver: 25,
+                    flow: 25,
+                    caudal: 25,
+                    humidity: 25,
+                    windSpeed: 25,
+                    windDirection: "N",
+                    date: "2020-03-11",
+                    hour: "11:53:02"
                 },
                 {
+                    lat: "1",
+                    long: "2",
                     idNodo: 1,
                     temperature: 16,
-                    humedad: 25,
-                    velocidadViento: 25,
-                    direccionViento: "N",
-                    Fecha: "2020-03-11",
-                    Hora: "11:53:02"
-
+                    temperatureWater: 14,
+                    levelRiver: 25,
+                    flow: 25,
+                    caudal: 25,
+                    humidity: 25,
+                    windSpeed: 25,
+                    windDirection: "N",
+                    date: "2020-03-11",
+                    hour: "11:53:02"
                 },
                 {
+                    lat: "1",
+                    long: "2",
                     idNodo: 1,
                     temperature: 16,
-                    humedad: 25,
-                    velocidadViento: 25,
-                    direccionViento: "N",
-                    Fecha: "2020-03-11",
-                    Hora: "11:53:02"
-
+                    temperatureWater: 14,
+                    levelRiver: 25,
+                    flow: 25,
+                    caudal: 25,
+                    humidity: 25,
+                    windSpeed: 25,
+                    windDirection: "N",
+                    date: "2020-03-11",
+                    hour: "11:53:02"
                 },
                 {
+                    lat: "1",
+                    long: "2",
                     idNodo: 1,
                     temperature: 16,
-                    humedad: 25,
-                    velocidadViento: 25,
-                    direccionViento: "N",
-                    Fecha: "2020-03-11",
-                    Hora: "11:53:02"
-
-                },
-                {
-                    idNodo: 1,
-                    temperature: 16,
-                    humedad: 25,
-                    velocidadViento: 25,
-                    direccionViento: "N",
-                    Fecha: "2020-03-11",
-                    Hora: "11:53:02"
-
-                },
-                {
-                    idNodo: 1,
-                    temperature: 16,
-                    humedad: 25,
-                    velocidadViento: 25,
-                    direccionViento: "N",
-                    Fecha: "2020-03-11",
-                    Hora: "11:53:02"
-
-                },
-                {
-                    idNodo: 1,
-                    temperature: 16,
-                    humedad: 25,
-                    velocidadViento: 25,
-                    direccionViento: "N",
-                    Fecha: "2020-03-11",
-                    Hora: "11:53:02"
-
-                },
-                {
-                    idNodo: 1,
-                    temperature: 16,
-                    humedad: 25,
-                    velocidadViento: 25,
-                    direccionViento: "N",
-                    Fecha: "2020-03-11",
-                    Hora: "11:53:02"
-
-                },
-                {
-                    idNodo: 1,
-                    temperature: 16,
-                    humedad: 25,
-                    velocidadViento: 25,
-                    direccionViento: "N",
-                    Fecha: "2020-03-11",
-                    Hora: "11:53:02"
-
-                },
-                {
-                    idNodo: 1,
-                    temperature: 16,
-                    humedad: 25,
-                    velocidadViento: 25,
-                    direccionViento: "N",
-                    Fecha: "2020-03-11",
-                    Hora: "11:23:02"
-
-                },
-                {
-                    idNodo: 1,
-                    temperature: 16,
-                    humedad: 25,
-                    velocidadViento: 25,
-                    direccionViento: "N",
-                    Fecha: "2020-03-11",
-                    Hora: "11:53:02"
-
-                },
-                {
-                    idNodo: 1,
-                    temperature: 16,
-                    humedad: 25,
-                    velocidadViento: 25,
-                    direccionViento: "N",
-                    Fecha: "2020-03-11",
-                    Hora: "11:26:02"
-
-                },
-                {
-                    idNodo: 1,
-                    temperature: 16,
-                    humedad: 25,
-                    velocidadViento: 25,
-                    direccionViento: "N",
-                    Fecha: "2020-03-11",
-                    Hora: "11:13:02"
-
-                },
-                {
-                    idNodo: 1,
-                    temperature: 16,
-                    humedad: 25,
-                    velocidadViento: 25,
-                    direccionViento: "N",
-                    Fecha: "2020-03-11",
-                    Hora: "11:33:02"
-
-                },
-                {
-                    idNodo: 1,
-                    temperature: 16,
-                    humedad: 25,
-                    velocidadViento: 25,
-                    direccionViento: "N",
-                    Fecha: "2020-03-11",
-                    Hora: "11:43:02"
-
-                },
-                {
-                    idNodo: 1,
-                    temperature: 16,
-                    humedad: 25,
-                    velocidadViento: 25,
-                    direccionViento: "N",
-                    Fecha: "2020-03-11",
-                    Hora: "11:13:02"
-
-                },
-                {
-                    idNodo: 1,
-                    temperature: 16,
-                    humedad: 25,
-                    velocidadViento: 25,
-                    direccionViento: "N",
-                    Fecha: "2020-03-11",
-                    Hora: "11:33:02"
-
-                },
-                {
-                    idNodo: 1,
-                    temperature: 16,
-                    humedad: 25,
-                    velocidadViento: 25,
-                    direccionViento: "N",
-                    Fecha: "2020-03-11",
-                    Hora: "11:43:02"
-
-                },
-                {
-                    idNodo: 1,
-                    temperature: 16,
-                    humedad: 25,
-                    velocidadViento: 25,
-                    direccionViento: "N",
-                    Fecha: "2020-03-11",
-                    Hora: "11:11:02"
-
-                },
-                {
-                    idNodo: 1,
-                    temperature: 16,
-                    humedad: 25,
-                    velocidadViento: 25,
-                    direccionViento: "N",
-                    Fecha: "2020-03-11",
-                    Hora: "11:12:02"
-
-                },
-                {
-                    idNodo: 1,
-                    temperature: 16,
-                    humedad: 25,
-                    velocidadViento: 25,
-                    direccionViento: "N",
-                    Fecha: "2020-03-11",
-                    Hora: "11:13:02"
-
-                },
-            ],
-            driversData :[
-                {
-                    number: 44,
-                    name: 'Lewis Hamilton',
-                    team: 'Mercedes',
-                    country: 'United Kingdom',
-                    dob: '07/01/1985',
-                    placeOfBirth: 'Stevenage, England'
-                },
-                {
-                    number: 77,
-                    name: 'Valtteri Bottas',
-                    team: 'Mercedes',
-                    country: 'Finland',
-                    dob: '28/08/1989',
-                    placeOfBirth: 'Nastola, Finland'
-                }, {
-                    number: 26,
-                    name: 'Daniil Kvyat',
-                    team: 'AlphaTauri',
-                    country: 'Russian Federation',
-                    dob: '26/04/1994',
-                    placeOfBirth: 'Ufa, Russia'
-                },
-                {
-                    number: 11,
-                    name: 'Sergio Perez',
-                    team: '	Racing Point',
-                    country: 'Mexico',
-                    dob: '26/01/1990',
-                    placeOfBirth: 'Guadalajara, Mexico'
-                },
-                {
-                    number: 18,
-                    name: 'Lance Stroll',
-                    team: '	Racing Point',
-                    country: 'Canada',
-                    dob: '29/10/1998',
-                    placeOfBirth: 'Montreal, Canada'
-                },
-                {
-                    number: 7,
-                    name: 'Kimi Räikkönen',
-                    team: 'Alfa Romeo',
-                    country: 'Finland',
-                    dob: '17/10/1979',
-                    placeOfBirth: 'Espoo, Finland'
-                },
-                {
-                    number: 99,
-                    name: 'Antonio Giovinazzi',
-                    team: 'Alfa Romeo',
-                    country: 'Italy',
-                    dob: '14/12/1993',
-                    placeOfBirth: 'Martina Franca, Italy'
-                },
-                {
-                    number: 20,
-                    name: 'Kevin Magnussen',
-                    team: 'Haas',
-                    country: 'Denmark',
-                    dob: '05/10/1992',
-                    placeOfBirth: 'Roskilde, Denmark'
-                },
-                {
-                    number: 8,
-                    name: 'Romain Grosjean',
-                    team: 'Haas',
-                    country: 'France',
-                    dob: '17/04/1986',
-                    placeOfBirth: 'Geneva, Switzerland'
-                },
-            ]
+                    temperatureWater: 14,
+                    levelRiver: 25,
+                    flow: 25,
+                    caudal: 25,
+                    humidity: 25,
+                    windSpeed: 25,
+                    windDirection: "N",
+                    date: "2020-03-11",
+                    hour: "11:53:02"
+                },],
+            climateData: [],
+            Riverdata: []
         }
     }
-    
+
+    searchNode = () => {
+        this.state.climateData = []
+        this.state.Riverdata = []
+        console.log(this.state.selectedNode);
+        var data = this.state.rawData;
+        var [lastItem] = data.slice(-1)
+        this.setState({ lat: lastItem.lat, long: lastItem.long })
+        console.log(lastItem);
+        for (var i in data) {
+            
+            var item = data[i];
+
+            this.state.climateData.push({
+                "idNodo": item.idNodo,
+                "temperature": item.temperature,
+                "humidity": item.humidity,
+                "windSpeed": item.windSpeed,
+                "windDirection": item.windDirection,
+                "date": item.date,
+                "Hour": item.hour
+            });
+
+            this.state.Riverdata.push({
+                "idNodo": item.idNodo,
+                "temperature": item.temperatureWater,
+                "levelRiver": item.levelRiver,
+                "flow": item.flow,
+                "caudal": item.caudal,
+                "date": item.date,
+                "Hour": item.hour
+            });
+        }
+       
+    }
     render() {
         return (
             <div className="m-0">
@@ -321,27 +145,29 @@ class InfoTable extends Component {
                                         <p className="h6 font-weight-bold text-muted">¿Cuál nodo sensor desea consultar?</p>
                                         <div className="row">
                                             <div className="col-12 col-sm-6">
-                                                <select class="custom-select" id="nodeSelector">
-                                                    <option selected>Todos los nodos</option>
-                                                    <option value="1">One</option>
-                                                    <option value="2">Two</option>
-                                                    <option value="3">Three</option>
+                                                <select value={this.state.selectedNode} onChange={(event) => { this.setState({ selectedNode: event.target.value }) }} className="custom-select" id="nodeSelector">
+                                                    <option defaultValue>Todos los nodos</option>
+                                                    {this.state.optionNodes.map((option, i) => {
+                                                        return (
+                                                            <option key={i} value={option.node}>Nodo {option.node}</option>
+                                                        );
+                                                    })}
                                                 </select>
                                             </div>
                                             <div className="col">
-                                                <button className="btn btn-success p-2 text-white z-depth-0 m-0 text-right align-middle mr-auto">Consultar nodo</button>
+                                                <button onClick={this.searchNode} className="btn btn-success p-2 text-white z-depth-0 m-0 text-right align-middle mr-auto">Consultar nodo</button>
                                             </div>
                                         </div>
-                                        
+
                                     </div>
                                     <div className="col-sm-6">
                                         <div className="form-group">
                                             <label htmlFor="longitudInput">Longitud</label>
-                                            <input type="text" className="form-control" id="longitudInput" readOnly/>
+                                            <input type="text" value={this.state.long} className="form-control" id="longitudInput" readOnly />
                                         </div>
                                         <div className="form-group">
                                             <label htmlFor="latitudInput">Latitud</label>
-                                            <input type="text" className="form-control" id="latitudInput" readOnly />
+                                            <input type="text" value={this.state.lat} className="form-control" id="latitudInput" readOnly />
                                         </div>
 
                                     </div>
@@ -356,16 +182,16 @@ class InfoTable extends Component {
                         <p className="h5 font-weight-bold mt-0 text-muted">Resultado Variables</p>
                         <p className="h6 font-weight-bold mt-2 text-muted">Variables Climatológicas</p>
                     </div>
-                  
+
                 </div>
 
                 <div className=" p-0 d-flex justify-content-center">
-                   
+
                     <div className="col-sm-8 m-0">
-                        <DataTable tableData={this.state.climateDate}
+                        <DataTable tableData={this.state.climateData}
                             headingColumns={['ID Nodo', 'Temperatura', 'Humedad', 'Velocidad del viento', 'Dirección del viento', 'Fecha', 'Hora']} />
                     </div>
-                    
+
                 </div>
 
                 <div className="  mt-0 p-0 d-flex justify-content-center">
@@ -377,13 +203,13 @@ class InfoTable extends Component {
 
                 <div className=" mb-3 d-flex justify-content-center">
                     <div className="col-sm-8 mb-6">
-                        <DataTable tableData={this.state.climateDate}
+                        <DataTable tableData={this.state.Riverdata}
                             headingColumns={['ID Nodo', 'Temperatura del río', 'Nivel de agua', 'Caudal', 'Flujo', 'Fecha', 'Hora']} />
                     </div>
 
                 </div>
             </div>
-           
+
         );
     }
 }

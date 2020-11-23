@@ -8,9 +8,9 @@ import L from 'leaflet';
 
 
 
-const NodeMap = () => {
-  const position = { lat: -33.8478796, lng: 150.7918932 };
-    const position2 = { lat: -25.8478796, lng: 150.7918932 };
+const NodeMap = (props) => {
+ 
+  const position = { lat: props.nodes[0].lat, lng: props.nodes[0].long };
     let DefaultIcon = L.icon({
         iconUrl: icon,
         shadowUrl: iconShadow
@@ -18,35 +18,30 @@ const NodeMap = () => {
     L.Marker.prototype.options.icon = DefaultIcon;
 
   return (
-      <MapContainer center={position} zoom={8}>
+      <MapContainer center={position} zoom={5}>
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
       />
-      <Marker
-        position={position}      
-        onMouseOver={e => {
-          e.target.openPopup();
-        }}
-        onMouseOut={e => {
-          e.target.closePopup();
-        }}
-      >
-        
-        <Popup>Sydney</Popup>
-      </Marker>
-      <Marker 
-        position={position2}
-        onMouseOver={e => {
-          e.target.openPopup();
-        }}
-        onMouseOut={e => {
-          e.target.closePopup();
-        }}
-      >
-        
-        <Popup>Sydney</Popup>
-      </Marker>
+      {props.nodes.map((node, i) => {
+        var nodeposition = {lat: node.lat, lng: node.long}
+        return (
+
+          <Marker
+            key={i}
+            position={nodeposition}
+            onMouseOver={e => {
+              e.target.openPopup();
+            }}
+            onMouseOut={e => {
+              e.target.closePopup();
+            }}
+          >
+
+            <Popup>Nodo {node.numnode}, lat:{node.lat}, long:{node.long}</Popup>
+          </Marker>
+        );
+      })}
       </MapContainer>
   );
 };
