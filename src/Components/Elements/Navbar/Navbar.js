@@ -9,7 +9,7 @@ const Navbar = () => {
     const toggleNavbar = () => setNavbarOpen(!navbarIsOpen);
 
     return (
-        <nav className="navbar  sticky-top shadow-sm mb-5 navbar-expand-sm o-navbar ">
+        <nav className="navbar  sticky-top shadow-sm  navbar-expand-sm o-navbar ">
             <a className="navbar-brand" href="/Login">
                 <img src={Logo} width="100" alt="Logo" />
             </a>
@@ -26,8 +26,8 @@ const Navbar = () => {
                     } navbar-collapse justify-content-lg-end`}
                 id="navbar-menu"
             >
-                <a className="nav-link o-navbar-links font-weight-bold" href="#">Inicio</a>
-                <a className="nav-link o-navbar-links font-weight-bold" href="#">Quienes somos?</a>
+                <a className="nav-link o-navbar-links font-weight-bold" href="/HomePage">Inicio</a>
+                <a className="nav-link o-navbar-links font-weight-bold" href="/apiPage">Quienes somos?</a>
                 <a className="nav-link o-navbar-links font-weight-bold" href="/Login">Iniciar sesión</a>
 
             </div>

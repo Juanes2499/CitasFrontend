@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { Switch, Route,  Redirect,  } from "react-router-dom";
 import Login2 from "../Pages/Login/Login2";
 import Loged from "../Pages/Loged/Dashboard";
+import HomePage from "../Pages/Login/HomePage";
+import apiPage from "../Pages/Login/apiPage";
 
 class Main extends Component {
   Redirect() {
@@ -16,7 +18,7 @@ class Main extends Component {
     } else {
       return (
         
-        <Redirect to="/Dashboard/Desktop" />
+        <Redirect to="/Dashboard/Home" />
         
       );
     }
@@ -27,7 +29,8 @@ class Main extends Component {
         <Switch>
           <Route exact path="/Login" component={Login2} />
           <Route path="/Dashboard" component={Loged} />
-         
+          <Route exact path="/HomePage" component={HomePage} />
+          <Route exact path="/apiPage" component={apiPage} />
           {this.Redirect()}
         </Switch>
       </div>

@@ -71,7 +71,7 @@ class Login2 extends Component {
             <div className="o-container-login">
                 <Navbar />
                 <div className="d-flex align-items-center justify-content-center">
-                    <div className="o-login-form  shadow bg-white">
+                    <div className="o-login-form mt-5 shadow bg-white">
                         <p className=" text-center h3 font-weight-bold d-flex align-items-center justify-content-center">Bienvenido, Gobierno</p>
                         <MDBInput maxlength="30" onChange={(event) => {
                             this.setState({ email: event.target.value });

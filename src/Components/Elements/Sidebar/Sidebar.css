@@ -71,7 +71,7 @@ li a.dropdown-toggle::after {
 	display: none;
 }
 .side-menu {
-	overflow-y: scroll;
+	overflow-y: auto;
 }
 
 .o-link-btn:hover {
