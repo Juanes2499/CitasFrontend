@@ -1,43 +1,88 @@
 import React, { Component } from "react";
 import NodeMap from "../../Elements/Map/NodeMap";
 import Accordion from "../../Elements/Accordion/Accordion3";
-
+import axios from "axios";
 class Home extends Component {
+
     constructor(props) {
         super(props);
         this.state = {
-            nodes: [
-                {
-                    idnode: "1",
-                    numnode: "1",
-                    lat: "-33.8478796",
-                    long: "150.7918932",
-                    batery: 25,
-                    operativestate: "Activo"
-                },
-                {
-                    idnode: "1",
-                    numnode: "1",
-                    lat: "-25.8478796",
-                    long: "150.7918932",
-                    batery: 25,
-                    operativestate: "Desactivado"
-                }
-            ],
-            criticalNodes: "",
+            nodes: [],
+            criticalNodes: 0,
             variables: {
-                temperAmb: "12345",
-                humidity: "12345",
-                windSpeed: "1",
-                tempRiver: "1",
-                riverHeight: "1",
-                flow: "34",
-                cau: "12"
+                temperAmb: 0,
+                humidity: 0,
+                windSpeed: 0,
+                tempRiver: 0,
+                riverHeight: 0,
+                flow: 0,
+                cau: 0
             }
 
+
         }
-}
-    render() {
+
+    }
+
+    async componentWillMount () {
+        /**
+         * {"statusCode":200,"body":[{"_id":"5fbad4345554ca0009c59a31","NumNodo":1,"Longitud":2,"Latitud":3,"Bateria":10,"Estado":false,"__v":0}]}
+         * 
+         */
+        this.httpInstance = axios.create({
+            baseURL: "https://xme9h9w868.execute-api.us-east-1.amazonaws.com/get1",
+            timeout: 1000,
+            headers: { 'Content-Type': 'application/json' }
+        });
+
+        this.httpInstance.get('/getnodes').then(respuesta => {
+            if (respuesta.status === 200) {
+                // console.log(respuesta.data.body);
+                this.setState({ criticalNodes: respuesta.data.body.length });
+                // this.setState({ nodes: respuesta.data.body });
+                for (var i in respuesta.data.body) {
+
+                    var item = respuesta.data.body[i];
+
+                    this.state.nodes.push({
+                        "_id": item._id,
+                        "NumNodo": item.NumNodo,
+                        "Longitud": item.Longitud,
+                        "Latitud": item.Latitud,
+                        "Bateria": item.Bateria,
+                        "Estado": item.Estado
+                    });
+                }
+                //  console.log(this.state.nodes);
+
+            } else {
+                console.log(respuesta);
+            }
+        });
+
+        this.httpInstance.get('/getgeneraldata').then(respuesta => {
+            if (respuesta.status === 200) {
+
+                // console.log(respuesta.data);
+                this.setState({
+                    variables: {
+                        temperAmb: respuesta.data.Temperatura,
+                        humidity: respuesta.data.Humedad,
+                        windSpeed: respuesta.data.Vel_viento,
+                        tempRiver: respuesta.data.Temperatura_agua,
+                        riverHeight: respuesta.data.Nivel_agua,
+                        flow: respuesta.data.Flujo,
+                        cau: respuesta.data.Caudal
+                    }
+                })
+
+            } else {
+                console.log(respuesta);
+            }
+        });
+
+    }
+    render () {
 
         return (
             <div>
@@ -51,14 +96,14 @@ class Home extends Component {
                     <div className="col">
                         <Accordion title="Nodos" color="bg-primary">
                             <div className="card p-3 m-0">
-                                <p className="h4">Nodos Críticos: <span className="text-warning">3</span></p>
+                                <p className="h4">Nodos : <span className="text-warning">{this.state.criticalNodes}</span></p>
                             </div>
                         </Accordion>
                         <Accordion title="Estado del nodo" color="bg-primary">
                             <div className="card p-2 m-0">
                                 {this.state.nodes.map((node, i) => {
                                     return (
-                                        <p key={i}>Estado del nodo {node.numnode} es: <span className={node.operativestate === "Activo" ? "text-success" : "text-danger"}>{node.operativestate}</span></p>
+                                        <p key={i}>Estado del nodo {node.NumNodo} es: <span className={node.Estado === "Activo" ? "text-success" : "text-danger"}>{node.Estado}</span></p>
                                     );
                                 })}
                             </div>
@@ -86,7 +131,7 @@ class Home extends Component {
                                         <small className="font-italic">Km/h</small>
                                     </div>
                                 </div>
-                                </div>
+                            </div>
                         </Accordion>
                     </div>
                     <div className="col">
@@ -114,7 +159,7 @@ class Home extends Component {
                                         <small className="font-italic">Litros/min</small>
                                     </div>
                                 </div>
-                                </div>
+                            </div>
                         </Accordion>
                     </div>
                 </div>
