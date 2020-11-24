@@ -29,47 +29,47 @@ class Home extends Component {
     }
     componentDidMount () {
 
-        if (!this.state.status1 && !this.state.status2) {
-            this.httpInstance = axios.create({
-                baseURL: "https://xme9h9w868.execute-api.us-east-1.amazonaws.com/get1",
-                timeout: 1000,
-                headers: { 'Content-Type': 'application/json' }
-            });
 
-            this.httpInstance.get('/getnodes').then(respuesta => {
-                if (respuesta.status === 200) {
-                    // console.log(respuesta.data.body);
-                    this.setState({ criticalNodes: respuesta.data.body.length });
-                    this.setState({ nodes: respuesta.data.body });
-                    this.setState({ status1: true });
-                    console.log(this.state.nodes);
+        this.httpInstance = axios.create({
+            baseURL: "https://xme9h9w868.execute-api.us-east-1.amazonaws.com/get1",
+            timeout: 1000,
+            headers: { 'Content-Type': 'application/json' }
+        });
 
-                } else {
-                    console.log(respuesta);
-                }
-            });
+        this.httpInstance.get('/getnodes').then(respuesta => {
+            if (respuesta.status === 200) {
+                // console.log(respuesta.data.body);
+                this.setState({ criticalNodes: respuesta.data.body.length });
+                this.setState({ nodes: respuesta.data.body });
+                this.setState({ status1: true });
+                console.log(this.state.nodes);
 
-            this.httpInstance.get('/getgeneraldata').then(respuesta => {
-                if (respuesta.status === 200) {
+            } else {
+                console.log(respuesta);
+            }
+        });
 
-                    // console.log(respuesta.data);
-                    this.setState({
-                        variables: {
-                            temperAmb: respuesta.data.Temperatura,
-                            humidity: respuesta.data.Humedad,
-                            windSpeed: respuesta.data.Vel_viento,
-                            tempRiver: respuesta.data.Temperatura_agua,
-                            riverHeight: respuesta.data.Nivel_agua,
-                            flow: respuesta.data.Flujo,
-                            cau: respuesta.data.Caudal
-                        }
-                    })
-                    this.setState({ status2: true });
-                } else {
-                    console.log(respuesta);
-                }
-            });
-        }
+        this.httpInstance.get('/getgeneraldata').then(respuesta => {
+            if (respuesta.status === 200) {
+
+                // console.log(respuesta.data);
+                this.setState({
+                    variables: {
+                        temperAmb: respuesta.data.Temperatura,
+                        humidity: respuesta.data.Humedad,
+                        windSpeed: respuesta.data.Vel_viento,
+                        tempRiver: respuesta.data.Temperatura_agua,
+                        riverHeight: respuesta.data.Nivel_agua,
+                        flow: respuesta.data.Flujo,
+                        cau: respuesta.data.Caudal
+                    }
+                })
+                this.setState({ status2: true });
+            } else {
+                console.log(respuesta);
+            }
+        });
+
 
     }
     render () {
