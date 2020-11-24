@@ -9,7 +9,7 @@ import L from 'leaflet';
 
 
 const NodeMap = (props) => {
-  console.log(props)
+ // console.log(props)
   const position = { lat: props.nodes[0].Latitud, lng: props.nodes[0].Longitud };
   let DefaultIcon = L.icon({
     iconUrl: icon,

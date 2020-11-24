@@ -123,6 +123,7 @@ class InfoTable extends Component {
 
     searchNode = () => {
         console.log(this.state.selectedNode);
+        this.setState({ climateData: [], Riverdata: [] });
         this.httpInstance.post('/getonenode', { "node": this.state.selectedNode }
         ).then(respuesta => {
             if (respuesta.status === 200) {
@@ -188,7 +189,7 @@ class InfoTable extends Component {
                                             <p className="h6 font-weight-bold text-muted">¿Cuál nodo sensor desea consultar?</p>
                                             <div className="row">
                                                 <div className="col-12 col-sm-6">
-                                                    <select value={this.state.selectedNode} onChange={(event) => { this.setState({ selectedNode: event.target.value }) }} className="custom-select" id="nodeSelector">
+                                                    <select  onChange={(event) => { this.setState({ selectedNode: event.target.value }) }} className="custom-select" id="nodeSelector">
                                                         <option defaultValue>Selecciona un nodo</option>
                                                         {this.state.optionNodes.map((option, i) => {
                                                             return (

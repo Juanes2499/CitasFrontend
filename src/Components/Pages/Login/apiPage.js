@@ -7,7 +7,7 @@ const apiPage = () => {
     return (
         <div className="w-100 h-100 m-0 p-0">
             <Navbar />
-            <img src={Map} />
+            <img src={Map} alt="Background of the Map of Cali" />
         </div>
     )
 }
