@@ -20,9 +20,9 @@ class NodeConfig extends Component {
             optionNodes: [],
             node: {
                 id: "",
-                
+
             },
-            
+
             status1: false,
         }
     }
@@ -30,26 +30,34 @@ class NodeConfig extends Component {
 
     putdata = () => {
         console.log(this.state.node);
-        console.log(this.state.lat + this.state.long + this.state.operativestate )
-        
-        this.httpInstance.put('/putnode', {
+        console.log(this.state.lat + this.state.long + this.state.operativestate)
+        /**
+         * NumNodo: this.state.node.NumNodo,
+                    Longitud: this.state.long == 0 ? this.state.node.long : this.state.long,
+                    Latitud: this.state.lat == 0 ? this.state.node.lat : this.state.lat,
+                    Bateria: this.state.node.Bateria,
+                    Estado: !this.state.operativestate ? this.state.node.operativeState : this.state.operativestate === "Activo" ? true : false
+         */
+        const obj = {
 
-            "NumNodo": this.state.node.NumNodo,
-            "Longitud": this.state.long == 0 ? this.state.node.long : this.state.long,
-            "Latitud": this.state.lat == 0 ? this.state.node.lat : this.state.lat,
-            "Bateria": this.state.node.Bateria,
-            "Estado": !this.state.operativestate ? this.state.node.operativeState : this.state.operativestate === "Activo" ? true : false
+            NumNodo: 1,
+            Longitud: 2,
+            Latitud: 3,
+            Bateria: 50,
+            Estado: true
 
-        }
+        };
+        console.log(obj)
+        this.httpInstance.put('/putnode', obj
         ).then(respuesta => {
             if (respuesta.status === 200) {
-                console.log(respuesta);
+                console.log(respuesta.data);
             } else {
                 console.log(respuesta);
             }
         });
     }
-    componentDidMount() {
+    componentDidMount () {
 
         this.httpInstance = axios.create({
             baseURL: "https://xme9h9w868.execute-api.us-east-1.amazonaws.com/get1",
@@ -103,7 +111,7 @@ class NodeConfig extends Component {
     update = (name, e) => {
         this.setState({ [name]: e.target.value });
     };
-    render() {
+    render () {
         if (this.state.status1) {
             return (
                 <div className="mb-4">
@@ -177,7 +185,7 @@ class NodeConfig extends Component {
                                                     <div className="input-group-prepend">
                                                         <div className="input-group-text">Longitud</div>
                                                     </div>
-                                                    <input type="text" defaultValue={this.state.node.Longitud} onChange={(e) => this.update("long", e)} className="form-control"  />
+                                                    <input type="text" defaultValue={this.state.node.Longitud} onChange={(e) => this.update("long", e)} className="form-control" />
                                                 </div>
                                             </div>
 

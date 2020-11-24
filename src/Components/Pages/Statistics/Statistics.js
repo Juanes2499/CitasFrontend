@@ -11,9 +11,11 @@ class Statistics extends Component {
         this.update = this.update.bind(this);
         this.state = {
             selectedNode: "",
-            optionNodes: []
+            optionNodes: [],
+            graficar: false
+
             ,
-            year: "", month: "", day: "", node: "",
+
             test: [{
                 idnode: "1",
                 numnode: 1,
@@ -26,7 +28,7 @@ class Statistics extends Component {
             },
             {
                 idnode: "1",
-                numnode:1,
+                numnode: 1,
                 lat: "3"
             }],
             dataLine: {
@@ -51,7 +53,7 @@ class Statistics extends Component {
                         pointRadius: 1,
                         pointHitRadius: 10,
                         data: [65, 59, 80, 81, 56, 55, 40, 65, 59, 80, 81, 56, 55, 40],
-                        
+
                     },
                 ]
             },
@@ -76,7 +78,8 @@ class Statistics extends Component {
                     pointHitRadius: 10,
                     data: [65, 59, 80, 81, 56, 55, 40, 65, 59, 80, 81, 56, 55, 40],
 
-                }] },
+                }]
+            },
             dataHumidity: { labels: [], datasets: [] },
             dataWindSpeed: { labels: [], datasets: [] },
             dataRiverTemperature: { labels: [], datasets: [] },
@@ -84,7 +87,7 @@ class Statistics extends Component {
             dataFlow: { labels: [], datasets: [] },
             dataCaudal: { labels: [], datasets: [] },
             status: false,
-            
+
         }
         this.httpInstance = axios.create({
             baseURL: "https://xme9h9w868.execute-api.us-east-1.amazonaws.com/get1",
@@ -92,20 +95,15 @@ class Statistics extends Component {
             headers: { 'Content-Type': 'application/json' }
         });
     }
-    
-    componentDidMount() {
+
+    componentDidMount () {
 
 
         this.httpInstance.get('/getnodes').then(respuesta => {
             if (respuesta.status === 200) {
                 // console.log(respuesta.data.body);
-                this.setState({ criticalNodes: respuesta.data.body.length });
-                var result = []
-                for (var i in respuesta.data.body) {
-                    result.push({ node: respuesta.data.body[i].NumNodo });
-                }
-                this.setState({ optionNodes: result });
-                this.setState({ status: true });
+                this.setState({ optionNodes: respuesta.data.body, status: true });
+
 
 
             } else {
@@ -114,43 +112,129 @@ class Statistics extends Component {
         });
 
     }
-    componentDidMount() {
 
-
-        this.httpInstance.get('/getnodes').then(respuesta => {
-            if (respuesta.status === 200) {
-                // console.log(respuesta.data.body);
-                var result = []
-                for (var i in respuesta.data.body) {
-                    result.push({ node: respuesta.data.body[i].NumNodo });
-                }
-                this.setState({ optionNodes: result });
-                this.setState({ status: true });
-
-
-            } else {
-                console.log(respuesta);
-            }
-        });
-
-    }
     update = (name, e) => {
+
         this.setState({ [name]: e.target.value });
     };
-    search() {
-        console.log("year: " + this.state.year + " month: " + this.state.month + " day: " + this.state.day);
+    search () {
+
+        var tem = [];
+        var hum = [];
+        var velv = [];
+        var dirv = [];
+        var tema = [];
+        var cau = [];
+        var nagua = [];
+        var flu = [];
+        var fe = [];
+        var ho = [];
+
+        const fechas = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "Deciembre"];
+
+        this.httpInstance.post('/getonenode', { node: this.state.selectedNode }).then(res => {
+            //  console.log(res.data.body.resultData);
+            for (var i in res.data.body.resultData) {
+                tem.push(res.data.body.resultData[i].Temperatura);
+                hum.push(res.data.body.resultData[i].Humedad);
+                velv.push(res.data.body.resultData[i].Vel_viento);
+                dirv.push(res.data.body.resultData[i].Dir_Viento);
+                tema.push(res.data.body.resultData[i].Temperatura_agua);
+                cau.push(res.data.body.resultData[i].Caudal);
+                nagua.push(res.data.body.resultData[i].Nivel_agua);
+                flu.push(res.data.body.resultData[i].Flujo);
+                var mydate = new Date(res.data.body.resultData[i].Fecha);
+                fe.push(fechas[mydate.getMonth()]);
+                ho.push(res.data.body.resultData[i].Hora);
+            }
+            var data = [
+                {
+                    label: "",
+                    fill: true,
+                    lineTension: 0.3,
+                    backgroundColor: "rgba(225, 204,230, .3)",
+                    borderColor: "rgb(205, 130, 158)",
+                    borderCapStyle: "butt",
+                    borderDashOffset: 0.0,
+                    borderJoinStyle: "miter",
+                    pointBorderColor: "rgb(205, 130,1 58)",
+                    pointBackgroundColor: "rgb(255, 255, 255)",
+                    pointBorderWidth: 10,
+                    pointHoverRadius: 5,
+                    pointHoverBackgroundColor: "rgb(0, 0, 0)",
+                    pointHoverBorderColor: "rgba(220, 220, 220,1)",
+                    pointHoverBorderWidth: 2,
+                    pointRadius: 1,
+                    pointHitRadius: 10,
+                    data: hum,
+
+                }
+            ]
+            const obj = { label: fe, datasets: data };
+            this.setState({ dataHumidity: obj });
+            console.log(this.state.dataHumidity);
+
+        });
+
+
         var data1 = this.state.test;
         var test2 = []
 
-        for (var i in data1 ) {
+        for (var i in data1) {
             this.state.dataAmbientTemperature.datasets[0].data.push(data1[i].numnode);
             console.log("Source: " + data1[i].numnode);
             console.log("Target: " + data1[i].lat);
         }
         console.log(this.state.dataAmbientTemperature.datasets[0].data)
     }
-    render() {
+    render () {
+        let graficos;
         if (this.state.status) {
+
+            if (this.state.graficar) {
+                graficos = <div className="row mt-4">
+                    <div className="col-sm-6">
+                        <Accordion title="Temperatura del ambiente" color="bg-danger" icon={faChartLine}>
+                            <Line data={this.state.dataHumidity} options={{ responsive: true }} />
+                        </Accordion>
+                    </div>
+                    <div className="col-sm-6">
+                        <Accordion title="Humedad" color="bg-primary" icon={faChartLine}>
+                            <Line data={this.state.dataLine} options={{ responsive: true }} />
+                        </Accordion>
+                    </div>
+                    <div className="col-sm-6">
+                        <Accordion title="Velocidad el viento" color="bg-warning" icon={faChartLine}>
+                            <Line data={this.state.dataLine} options={{ responsive: true }} />
+                        </Accordion>
+                    </div>
+                    <div className="col-sm-6">
+                        <Accordion title="Temperatura del río" color="bg-success" icon={faChartLine}>
+                            <Line data={this.state.dataLine} options={{ responsive: true }} />
+                        </Accordion>
+                    </div>
+                    <div className="col-sm-6">
+                        <Accordion title="Nivel del río" color="bg-secondary" icon={faChartLine}>
+                            <Line data={this.state.dataLine} options={{ responsive: true }} />
+                        </Accordion>
+                    </div>
+                    <div className="col-sm-6">
+                        <Accordion title="Flujo" color="default-color-dark" icon={faChartLine}>
+                            <Line data={this.state.dataLine} options={{ responsive: true }} />
+                        </Accordion>
+                    </div>
+                    <div className="col-sm-6">
+                        <Accordion title="Caudal" color="amber darken-2" icon={faChartLine}>
+                            <Line data={this.state.dataLine} options={{ responsive: true }} />
+                        </Accordion>
+                    </div>
+                </div>;
+            } else {
+                graficos = null;
+            }
+
+
+
             return (
                 <div className="p-2 mb-4">
                     <div className="row  mt-0">
@@ -164,39 +248,13 @@ class Statistics extends Component {
                                 </div>
                                 <div className="card-body">
                                     <div className="row p-1">
-                                        <div className="col-4 col-sm-2 ">
-                                            <label className="sr-only" htmlFor="inlineFormInputGroup">Año</label>
-                                            <div className="input-group mb-2">
-                                                <div className="input-group-prepend">
-                                                    <div className="input-group-text">Año</div>
-                                                </div>
-                                                <input type="text" onChange={(e) => this.update("year", e)} value={this.state.year} className="form-control" />
-                                            </div>
-                                        </div>
-                                        <div className="col-4 col-sm-2 ">
-                                            <label className="sr-only" htmlFor="inlineFormInputGroup">Mes</label>
-                                            <div className="input-group mb-2">
-                                                <div className="input-group-prepend">
-                                                    <div className="input-group-text">Mes</div>
-                                                </div>
-                                                <input type="text" onChange={(e) => this.update("month", e)} value={this.state.month} className="form-control" />
-                                            </div>
-                                        </div>
-                                        <div className="col-4 col-sm-2 ">
-                                            <label className="sr-only" htmlFor="inlineFormInputGroup">Día</label>
-                                            <div className="input-group mb-2">
-                                                <div className="input-group-prepend">
-                                                    <div className="input-group-text">Día</div>
-                                                </div>
-                                                <input type="text" onChange={(e) => this.update("day", e)} value={this.state.day} className="form-control" />
-                                            </div>
-                                        </div>
+
                                         <div className="col-4 col-sm-3 ">
                                             <select value={this.state.selectedNode} onChange={(e) => this.update("selectedNode", e)} className="custom-select" id="nodeSelector">
-                                                <option defaultValue>Todos los nodos</option>
+                                                <option defaultValue>Seleccione un nodo</option>
                                                 {this.state.optionNodes.map((option, i) => {
                                                     return (
-                                                        <option key={i} value={option.node}>Nodo {option.node}</option>
+                                                        <option key={i} value={option.NumNodo}>Nodo {option.NumNodo}</option>
                                                     );
                                                 })}
                                             </select>
@@ -209,44 +267,8 @@ class Statistics extends Component {
                             </div>
                         </div>
                     </div>
-                    <div className="row mt-4">
-                        <div className="col-sm-6">
-                            <Accordion title="Temperatura del ambiente" color="bg-danger" icon={faChartLine}>
-                                <Line data={this.state.dataLine} options={{ responsive: true }} />
-                            </Accordion>
-                        </div>
-                        <div className="col-sm-6">
-                            <Accordion title="Humedad" color="bg-primary" icon={faChartLine}>
-                                <Line data={this.state.dataLine} options={{ responsive: true }} />
-                            </Accordion>
-                        </div>
-                        <div className="col-sm-6">
-                            <Accordion title="Velocidad el viento" color="bg-warning" icon={faChartLine}>
-                                <Line data={this.state.dataLine} options={{ responsive: true }} />
-                            </Accordion>
-                        </div>
-                        <div className="col-sm-6">
-                            <Accordion title="Temperatura del río" color="bg-success" icon={faChartLine}>
-                                <Line data={this.state.dataLine} options={{ responsive: true }} />
-                            </Accordion>
-                        </div>
-                        <div className="col-sm-6">
-                            <Accordion title="Nivel del río" color="bg-secondary" icon={faChartLine}>
-                                <Line data={this.state.dataLine} options={{ responsive: true }} />
-                            </Accordion>
-                        </div>
-                        <div className="col-sm-6">
-                            <Accordion title="Flujo" color="default-color-dark" icon={faChartLine}>
-                                <Line data={this.state.dataLine} options={{ responsive: true }} />
-                            </Accordion>
-                        </div>
-                        <div className="col-sm-6">
-                            <Accordion title="Caudal" color="amber darken-2" icon={faChartLine}>
-                                <Line data={this.state.dataLine} options={{ responsive: true }} />
-                            </Accordion>
-                        </div>
-                    </div>
 
+                    {graficos}
 
                 </div>
             )
@@ -255,7 +277,7 @@ class Statistics extends Component {
                 <div>Cargando...</div>
             )
         }
-        
+
     }
 
 }
