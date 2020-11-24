@@ -13,8 +13,7 @@ class NodeConfig extends Component {
         this.search = this.search.bind(this);
         this.state = {
             lat: 0,
-            long: 0,
-            operativestate: ""
+            long: 0
             ,
             selectedNode: 0,
             optionNodes: [],
@@ -37,12 +36,13 @@ class NodeConfig extends Component {
 
         console.log(this.state.node);
         console.log(this.state.lat + this.state.long + this.state.operativestate)
-        var long = Number(this.state.long === 0 ? this.state.node.long : this.state.long);
-        var lat = Number(this.state.lat === 0 ? this.state.node.lat : this.state.lat);
-        var state = (this.state.operativestate === "" ? this.state.node.operativeState : this.state.operativestate === "Activo" ? true : false);
+        var long = Number(this.state.long === 0 ? this.state.node.Longitud : this.state.long);
+        var lat = Number(this.state.lat === 0 ? this.state.node.Latitud : this.state.lat);
+        var state = this.state.node.Estado;
         console.log(lat);
         console.log(long)
         console.log(state);
+        console.log(this.state.operativestate);
         var num = this.state.node.NumNodo;
         var batery = this.state.node.Bateria;
         console.log(num);
@@ -57,17 +57,13 @@ class NodeConfig extends Component {
             Estado: state
 
 
+        }).then(respuesta => {
+            console.log(respuesta.data);
         });
 
 
     }
     componentDidMount () {
-
-        this.httpInstance = axios.create({
-            baseURL: "https://xme9h9w868.execute-api.us-east-1.amazonaws.com/get1",
-            timeout: 10000,
-            headers: { 'Content-Type': 'application/json' }
-        });
 
         this.httpInstance.get('/getnodes').then(respuesta => {
             if (respuesta.status === 200) {
@@ -119,6 +115,7 @@ class NodeConfig extends Component {
         this.setState({ [name]: e.target.value });
     };
     render () {
+
         if (this.state.status1) {
             return (
                 <div className="mb-4">
@@ -220,7 +217,7 @@ class NodeConfig extends Component {
                                                     <div className="input-group-prepend">
                                                         <div className="input-group-text">Estado</div>
                                                     </div>
-                                                    <input type="text" onChange={(e) => this.update("operativestate", e)} defaultValue={this.state.node.Estado ? "Desactivado" : "Activo"} className="form-control" placeholder="Agregar el estado del nodo" />
+                                                    <input type="text" defaultValue={!this.state.node.Estado ? "Desactivado" : "Activo"} className="form-control" placeholder="Agregar el estado del nodo" readOnly />
                                                 </div>
                                             </div>
                                         </form>
