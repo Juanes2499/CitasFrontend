@@ -12,8 +12,8 @@ class NodeConfig extends Component {
         this.putdata = this.putdata.bind(this);
         this.search = this.search.bind(this);
         this.state = {
-            lat: "",
-            long: "",
+            lat: 0,
+            long: 0,
             operativestate: ""
             ,
             selectedNode: 0,
@@ -29,10 +29,37 @@ class NodeConfig extends Component {
 
 
     putdata = () => {
+        this.httpInstance = axios.create({
+            baseURL: "https://xme9h9w868.execute-api.us-east-1.amazonaws.com/get1",
+            timeout: 10000,
+            headers: { 'Content-Type': 'application/json' }
+        });
         console.log(this.state.node);
+<<<<<<< HEAD
         console.log(this.state.lat + this.state.long + this.state.operativestate)
 
         const obj = {
+=======
+        console.log(this.state.lat + this.state.long + this.state.operativestate )
+        var long = Number(this.state.long === 0 ? this.state.node.long : this.state.long);
+        var lat = Number(this.state.lat === 0 ? this.state.node.lat : this.state.lat);
+        var state = (this.state.operativestate === "" ? this.state.node.operativeState : this.state.operativestate === "Activo" ? true : false);
+        console.log(lat);
+        console.log(long)
+        console.log(state);
+        var num = this.state.node.NumNodo;
+        var batery = this.state.node.Bateria;
+        console.log(num);
+        console.log(batery);
+
+        this.httpInstance.put('/putnode', {
+
+            NumNodo: num,
+            Longitud: long,
+            Latitud : lat,
+            Bateria : batery,
+            Estado: state
+>>>>>>> master
 
             NumNodo: this.state.node.NumNodo,
             Longitud: this.state.long == 0 ? this.state.node.long : this.state.long,
@@ -85,21 +112,24 @@ class NodeConfig extends Component {
         // this.setState({ nodes: this.state.selectedNode });
         var item = this.state.optionNodes.find(node => node.NumNodo == this.state.selectedNode);
         console.log(item);
+        var state = item.Estado;
+        console.log(state)
         if (item) {
             this.setState({
                 node: {
-                    "id": item._id,
-                    "NumNodo": item.NumNodo,
-                    "Latitud": item.Latitud,
-                    "Longitud": item.Longitud,
-                    "Bateria": item.Bateria,
-                    "operativeState": item.Estado
+                    id: item._id,
+                    NumNodo: item.NumNodo,
+                    Latitud: item.Latitud,
+                    Longitud: item.Longitud,
+                    Bateria: item.Bateria,
+                    Estado : state
                 }
             })
             console.log(this.state.node)
         } else {
             console.log("Dorime");
         }
+        console.log(this.state.node.Estado)
     }
 
     update = (name, e) => {
@@ -207,7 +237,7 @@ class NodeConfig extends Component {
                                                     <div className="input-group-prepend">
                                                         <div className="input-group-text">Estado</div>
                                                     </div>
-                                                    <input type="text" onChange={(e) => this.update("operativestate", e)} defaultValue={this.state.node.operativeState ? "Activo" : "Desactivado"} className="form-control" placeholder="Agregar el estado del nodo" />
+                                                    <input type="text" onChange={(e) => this.update("operativestate", e)} defaultValue={!this.state.node.Estado ? "Desactivado" : "Activo"} className="form-control" placeholder="Agregar el estado del nodo" />
                                                 </div>
                                             </div>
                                         </form>
