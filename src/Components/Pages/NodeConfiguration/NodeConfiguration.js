@@ -29,16 +29,21 @@ class NodeConfig extends Component {
 
 
     putdata = () => {
+        this.httpInstance = axios.create({
+            baseURL: "https://xme9h9w868.execute-api.us-east-1.amazonaws.com/get1",
+            timeout: 10000,
+            headers: { 'Content-Type': 'application/json' }
+        });
         console.log(this.state.node);
         console.log(this.state.lat + this.state.long + this.state.operativestate )
         
         this.httpInstance.put('/putnode', {
 
             "NumNodo": this.state.node.NumNodo,
-            "Longitud": this.state.long == 0 ? this.state.node.long : this.state.long,
-            "Latitud": this.state.lat == 0 ? this.state.node.lat : this.state.lat,
+            "Longitud": this.state.long === "" ? this.state.node.long : this.state.long,
+            "Latitud": this.state.lat === "" ? this.state.node.lat : this.state.lat,
             "Bateria": this.state.node.Bateria,
-            "Estado": !this.state.operativestate ? this.state.node.operativeState : this.state.operativestate === "Activo" ? true : false
+            "Estado": !this.state.operativestate === "" ? this.state.node.operativeState : this.state.operativestate === "Activo" ? true : false
 
         }
         ).then(respuesta => {
