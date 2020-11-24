@@ -69,9 +69,8 @@ class Home extends Component {
                 console.log(respuesta);
             }
         });
-
-
     }
+    
     render () {
         if (this.state.status1 && this.state.status2) {
 
