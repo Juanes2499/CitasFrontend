@@ -123,48 +123,49 @@ class InfoTable extends Component {
 
     searchNode = () => {
         console.log(this.state.selectedNode);
-        var j = JSON.stringify({ node: 1 });
         this.httpInstance.post('/getonenode', { "node": this.state.selectedNode }
         ).then(respuesta => {
             if (respuesta.status === 200) {
-                console.log(respuesta.data);
+                console.log(respuesta.data.body.resultData);
 
+                for (var i in respuesta.data.body.resultData) {
 
+                    var item = respuesta.data.body.resultData[i];
+
+                    this.state.climateData.push({
+                        "idNodo": respuesta.data.body.resultnode[0].NumNodo,
+                        "temperature": item.Temperatura,
+                        "humidity": item.Humedad,
+                        "windSpeed": item.Vel_viento,
+                        "windDirection": item.Dir_Viento,
+                        "date": item.Fecha,
+                        "Hour": item.Hora
+                    });
+
+                    this.state.Riverdata.push({
+                        "idNodo": respuesta.data.body.resultnode[0].NumNodo,
+                        "temperature": item.Temperatura_agua,
+                        "levelRiver": item.Nivel_agua,
+                        "flow": item.Flujo,
+                        "caudal": item.Caudal,
+                        "date": item.Fecha,
+                        "Hour": item.Hora
+                    })
+                    this.setState({ lat: respuesta.data.body.resultnode[0].Latitud, long: respuesta.data.body.resultnode[0].Longitud })
+
+                }
+
+                
+                console.log(this.state);
             } else {
                 console.log(respuesta);
             }
         });
-        this.state.climateData = []
-        this.state.Riverdata = []
+        
         console.log(this.state.selectedNode);
-        var data = this.state.rawData;
-        var [lastItem] = data.slice(-1)
-        this.setState({ lat: lastItem.lat, long: lastItem.long })
-        console.log(lastItem);
-        for (var i in data) {
-
-            var item = data[i];
-
-            this.state.climateData.push({
-                "idNodo": item.idNodo,
-                "temperature": item.temperature,
-                "humidity": item.humidity,
-                "windSpeed": item.windSpeed,
-                "windDirection": item.windDirection,
-                "date": item.date,
-                "Hour": item.hour
-            });
-
-            this.state.Riverdata.push({
-                "idNodo": item.idNodo,
-                "temperature": item.temperatureWater,
-                "levelRiver": item.levelRiver,
-                "flow": item.flow,
-                "caudal": item.caudal,
-                "date": item.date,
-                "Hour": item.hour
-            });
-        }
+        
+     
+       
 
     }
     render () {
@@ -188,7 +189,7 @@ class InfoTable extends Component {
                                             <div className="row">
                                                 <div className="col-12 col-sm-6">
                                                     <select value={this.state.selectedNode} onChange={(event) => { this.setState({ selectedNode: event.target.value }) }} className="custom-select" id="nodeSelector">
-                                                        <option defaultValue>Todos los nodos</option>
+                                                        <option defaultValue>Selecciona un nodo</option>
                                                         {this.state.optionNodes.map((option, i) => {
                                                             return (
                                                                 <option key={i} value={option.node}>Nodo {option.node}</option>
