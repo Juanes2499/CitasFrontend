@@ -9,7 +9,7 @@ import L from 'leaflet';
 
 
 const NodeMap = (props) => {
-  console.log(props.nodes);
+  console.log(props)
   const position = { lat: props.nodes[0].Latitud, lng: props.nodes[0].Longitud };
   let DefaultIcon = L.icon({
     iconUrl: icon,
@@ -24,7 +24,7 @@ const NodeMap = (props) => {
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
       />
       {props.nodes.map((node, i) => {
-        var nodeposition = { lat: node.lat, lng: node.long }
+        var nodeposition = { lat: node.Latitud, lng: node.Longitud }
         return (
 
           <Marker
@@ -38,7 +38,7 @@ const NodeMap = (props) => {
             }}
           >
 
-            <Popup>Nodo {node.numnode}, lat:{node.lat}, long:{node.long}</Popup>
+            <Popup>Nodo {node.NumNodo}, lat:{node.Latitud}, long:{node.Longitud}</Popup>
           </Marker>
         );
       })}
