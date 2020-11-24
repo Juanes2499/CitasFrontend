@@ -240,7 +240,6 @@ class SensorNode extends Component {
                             </Accordion>
                         )
                     })}
-                    );
 
 
                 </div>
