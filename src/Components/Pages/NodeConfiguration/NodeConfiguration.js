@@ -25,22 +25,18 @@ class NodeConfig extends Component {
 
             status1: false,
         }
-    }
-
-
-    putdata = () => {
         this.httpInstance = axios.create({
             baseURL: "https://xme9h9w868.execute-api.us-east-1.amazonaws.com/get1",
             timeout: 10000,
             headers: { 'Content-Type': 'application/json' }
         });
-        console.log(this.state.node);
-<<<<<<< HEAD
-        console.log(this.state.lat + this.state.long + this.state.operativestate)
+    }
 
-        const obj = {
-=======
-        console.log(this.state.lat + this.state.long + this.state.operativestate )
+
+    putdata = () => {
+
+        console.log(this.state.node);
+        console.log(this.state.lat + this.state.long + this.state.operativestate)
         var long = Number(this.state.long === 0 ? this.state.node.long : this.state.long);
         var lat = Number(this.state.lat === 0 ? this.state.node.lat : this.state.lat);
         var state = (this.state.operativestate === "" ? this.state.node.operativeState : this.state.operativestate === "Activo" ? true : false);
@@ -56,27 +52,14 @@ class NodeConfig extends Component {
 
             NumNodo: num,
             Longitud: long,
-            Latitud : lat,
-            Bateria : batery,
+            Latitud: lat,
+            Bateria: batery,
             Estado: state
->>>>>>> master
 
-            NumNodo: this.state.node.NumNodo,
-            Longitud: this.state.long == 0 ? this.state.node.long : this.state.long,
-            Latitud: this.state.lat == 0 ? this.state.node.lat : this.state.lat,
-            Bateria: this.state.node.Bateria,
-            Estado: !this.state.operativestate ? this.state.node.operativeState : this.state.operativestate === "Activo" ? true : false
 
-        };
-        console.log(obj)
-        this.httpInstance.put('/putnode', obj
-        ).then(respuesta => {
-            if (respuesta.status === 200) {
-                console.log(respuesta.data);
-            } else {
-                console.log(respuesta);
-            }
         });
+
+
     }
     componentDidMount () {
 
@@ -122,7 +105,7 @@ class NodeConfig extends Component {
                     Latitud: item.Latitud,
                     Longitud: item.Longitud,
                     Bateria: item.Bateria,
-                    Estado : state
+                    Estado: state
                 }
             })
             console.log(this.state.node)
@@ -237,7 +220,7 @@ class NodeConfig extends Component {
                                                     <div className="input-group-prepend">
                                                         <div className="input-group-text">Estado</div>
                                                     </div>
-                                                    <input type="text" onChange={(e) => this.update("operativestate", e)} defaultValue={!this.state.node.Estado ? "Desactivado" : "Activo"} className="form-control" placeholder="Agregar el estado del nodo" />
+                                                    <input type="text" onChange={(e) => this.update("operativestate", e)} defaultValue={this.state.node.Estado ? "Desactivado" : "Activo"} className="form-control" placeholder="Agregar el estado del nodo" />
                                                 </div>
                                             </div>
                                         </form>
