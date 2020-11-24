@@ -63,7 +63,7 @@ class NodeConfig extends Component {
 
 
     }
-    componentDidMount () {
+    componentDidMount() {
 
         this.httpInstance.get('/getnodes').then(respuesta => {
             if (respuesta.status === 200) {
@@ -114,7 +114,7 @@ class NodeConfig extends Component {
     update = (name, e) => {
         this.setState({ [name]: e.target.value });
     };
-    render () {
+    render() {
 
         if (this.state.status1) {
             return (
@@ -217,7 +217,7 @@ class NodeConfig extends Component {
                                                     <div className="input-group-prepend">
                                                         <div className="input-group-text">Estado</div>
                                                     </div>
-                                                    <input type="text" defaultValue={!this.state.node.Estado ? "Desactivado" : "Activo"} className="form-control" placeholder="Agregar el estado del nodo" readOnly />
+                                                    <input type="text" defaultValue={this.state.node.Estado ? "Desactivado" : "Activo"} className="form-control" placeholder="Agregar el estado del nodo" readOnly />
                                                 </div>
                                             </div>
                                         </form>
