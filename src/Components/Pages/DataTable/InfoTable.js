@@ -124,11 +124,8 @@ class InfoTable extends Component {
     searchNode = () => {
         console.log(this.state.selectedNode);
         var j = JSON.stringify({ node: 1 });
-        this.httpInstance.get('/getonenode', {
-            params: {
-                "node": 2
-            }
-        }).then(respuesta => {
+        this.httpInstance.post('/getonenode', { "node": this.state.selectedNode }
+        ).then(respuesta => {
             if (respuesta.status === 200) {
                 console.log(respuesta.data);
 
