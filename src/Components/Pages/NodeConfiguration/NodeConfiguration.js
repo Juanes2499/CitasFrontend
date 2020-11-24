@@ -31,20 +31,14 @@ class NodeConfig extends Component {
     putdata = () => {
         console.log(this.state.node);
         console.log(this.state.lat + this.state.long + this.state.operativestate)
-        /**
-         * NumNodo: this.state.node.NumNodo,
-                    Longitud: this.state.long == 0 ? this.state.node.long : this.state.long,
-                    Latitud: this.state.lat == 0 ? this.state.node.lat : this.state.lat,
-                    Bateria: this.state.node.Bateria,
-                    Estado: !this.state.operativestate ? this.state.node.operativeState : this.state.operativestate === "Activo" ? true : false
-         */
+
         const obj = {
 
-            NumNodo: 1,
-            Longitud: 2,
-            Latitud: 3,
-            Bateria: 50,
-            Estado: true
+            NumNodo: this.state.node.NumNodo,
+            Longitud: this.state.long == 0 ? this.state.node.long : this.state.long,
+            Latitud: this.state.lat == 0 ? this.state.node.lat : this.state.lat,
+            Bateria: this.state.node.Bateria,
+            Estado: !this.state.operativestate ? this.state.node.operativeState : this.state.operativestate === "Activo" ? true : false
 
         };
         console.log(obj)
