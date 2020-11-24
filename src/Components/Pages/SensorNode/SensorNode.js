@@ -46,62 +46,69 @@ class SensorNode extends Component {
             status1: false,
             status2: false
         }
-    }
-
-
-    componentDidMount() {
-        console.log("El estado de esto es: " + this.state.nodes2);
         this.httpInstance = axios.create({
             baseURL: "https://xme9h9w868.execute-api.us-east-1.amazonaws.com/get1",
             timeout: 10000,
             headers: { 'Content-Type': 'application/json' }
         });
-
-        this.httpInstance.get('/getnodes').then(respuesta => {
-            if (respuesta.status === 200) {
-                // console.log(respuesta.data.body);
-                this.setState({
-                    nodes2: {
-                        idnode: respuesta.data.body._id,
-                        numnode: respuesta.data.body.Numnodo,
-                        lat: respuesta.data.body.Latitud,
-                        long: respuesta.data.body.Longitud,
-                        batery: respuesta.data.body.Bateria,
-                    }
-                })
-                this.setState({ status1: true });
-              //  console.log(this.state.nodes);
-
-            } else {
-                console.log(respuesta);
-            }
-        });
-
-        this.httpInstance.get('/getavn').then(respuesta => {
-            if (respuesta.status === 200) {
-
-                console.log(respuesta.data.body[0].data_pro);
-                /*
-                this.setState({
-                    nodes2: {
-                        temperAmb: respuesta.data.body.data_pro.Temperatura,
-                        humidity: respuesta.data.body.data_pro.Humedad,
-                        windSpeed: respuesta.data.body.data_pro.Vel_viento,
-                        tempRiver: respuesta.data.body.data_pro.Temperatura_agua,
-                        riverHeight: respuesta.data.body.data_pro.Nivel_agua,
-                        flow: respuesta.data.body.data_pro.Flujo,
-                        cau: respuesta.data.body.data_pro.Caudal
-                    }
-                })*/
-                this.setState({ status2: true });
-            } else {
-                console.log(respuesta);
-            }
-        });
-        console.log(this.state.nodes2)
     }
 
-    render() {
+
+    componentDidMount () {
+        /// console.log("El estado de esto es: " + this.state.nodes2);
+
+        var nodes = [];
+        var propm = [];
+        var result = [];
+        this.httpInstance.get('/getnodes').then(respuesta => {
+            if (respuesta.status === 200) {
+                nodes = respuesta.data.body;
+
+                this.httpInstance.get('/getavn').then(respuesta2 => {
+                    if (respuesta2.status === 200) {
+                        propm = respuesta2.data.body;
+                        console.log(propm);
+                        for (var i in nodes) {
+                            for (var j in propm) {
+                                if (nodes[i].NumNodo == propm[j].NumNodo) {
+                                    result.push({
+                                        idnode: nodes[i].NumNodo,
+                                        numnode: nodes[i].NumNodo,
+                                        lat: nodes[i].Latitud,
+                                        long: nodes[i].Longitud,
+                                        batery: nodes[i].Bateria,
+                                        operativestate: nodes[i].Estado,
+                                        temperAmb: propm[j].data_pro.Temperatura,
+                                        humidity: propm[j].data_pro.Humedad,
+                                        windSpeed: propm[j].data_pro.Vel_viento,
+                                        tempRiver: propm[j].data_pro.Temperatura_agua,
+                                        riverHeight: propm[j].data_pro.Nivel_agua,
+                                        flow: propm[j].data_pro.Flujo,
+                                        cau: propm[j].data_pro.Caudal
+                                    })
+                                }
+                            }
+                        }
+                        //  console.log(result);
+                        this.setState({ nodes2: result, status1: true, status2: true });
+                        console.log(this.state.nodes2)
+                    } else {
+                        console.log(respuesta2);
+                    }
+                });
+
+
+                //console.log(nodes)
+            } else { console.log(respuesta); }
+        });
+
+
+
+
+
+    }
+
+    render () {
         if (this.state.status1 && this.state.status2) {
 
             return (
@@ -109,7 +116,7 @@ class SensorNode extends Component {
                     <div className="row  mt-0">
                         <p className="h5 font-weight-bold mt-0 text-muted">Bienvenido a Smart Cities UAO</p>
                     </div>
-                    {this.state.nodes.map((node, i) => {
+                    {this.state.nodes2.map((node, i) => {
                         return (
                             <Accordion key={i} icon={faChartBar} color="bg-primary" title={"Nodo sensor " + node.numnode}>
                                 <div className="card  w-100 col-12 container rounded-0 p-2 m-0">
