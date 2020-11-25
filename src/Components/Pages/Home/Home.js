@@ -70,12 +70,12 @@ class Home extends Component {
             }
         });
     }
-    
+
     render () {
         if (this.state.status1 && this.state.status2) {
 
             return (
-                <div>
+                <div >
                     <div className="row mt-0">
                         <p className="h5 font-weight-bold mt-0 text-muted">Bienvenido a Smart Cities UAO</p>
                     </div>
