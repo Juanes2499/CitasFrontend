@@ -3,17 +3,43 @@ import React, { Component } from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
-
+import axios from "axios";
 class AddNode extends Component {
     constructor(props) {
         super(props);
         this.state = { numnode: "", lat: "", long: "", batery: "", operativeState: "" };
         this.addNode = this.addNode.bind(this);
         this.update = this.update.bind(this);
+        this.httpInstance = axios.create({
+            baseURL: "https://xme9h9w868.execute-api.us-east-1.amazonaws.com/get1",
+            timeout: 10000,
+            headers: { 'Content-Type': 'application/json' }
+        });
     }
 
     addNode = () => {
+        var state = this.state.operativeState === "Activo" ? true : false;
         console.log(this.state);
+        var number = Number(this.state.numnode);
+        var lat = Number(this.state.lat);
+        var long = Number(this.state.long);
+        var batery = Number(this.state.batery);
+        console.log(state);
+        this.httpInstance.post('/potnode', {
+            "NumNodo": number,
+            "Longitud": long,
+            "Latitud": lat,
+            "Bateria": batery,
+            "Estado": state
+        }
+        ).then(respuesta => {
+            if (respuesta.status === 200) {
+                console.log(respuesta);
+                this.setState({ numnode: "", lat: "", long: "", batery: "", operativeState: "" });
+            } else {
+                console.log(respuesta);
+            }
+        });
     }
     update = (name, e) => {
         this.setState({ [name]: e.target.value });
@@ -42,7 +68,7 @@ class AddNode extends Component {
                                         <div className="input-group-prepend">
                                             <div className="input-group-text">Número del nodo</div>
                                         </div>
-                                        <input type="text" onChange={(e) => this.update("numnode", e)} className="form-control" placeholder="Agregar el número del nodo" />
+                                        <input type="text" onChange={(e) => this.update("numnode", e)} value={this.state.numnode} className="form-control" placeholder="Agregar el número del nodo" />
                                     </div>
                                 </div>
 
@@ -54,7 +80,7 @@ class AddNode extends Component {
                                         <div className="input-group-prepend">
                                             <div className="input-group-text">Longitud</div>
                                         </div>
-                                        <input type="text" onChange={(e) => this.update("long", e)} className="form-control" placeholder="Agregar la longitud del nodo" />
+                                        <input type="text" onChange={(e) => this.update("long", e)} value={this.state.long} className="form-control" placeholder="Agregar la longitud del nodo" />
                                     </div>
                                 </div>
 
@@ -64,7 +90,7 @@ class AddNode extends Component {
                                         <div className="input-group-prepend">
                                             <div className="input-group-text">Latitud</div>
                                         </div>
-                                        <input type="text" onChange={(e) => this.update("lat", e)} className="form-control" placeholder="Agregar la latitud del nodo" />
+                                        <input type="text" onChange={(e) => this.update("lat", e)} value={this.state.lat} className="form-control" placeholder="Agregar la latitud del nodo" />
                                     </div>
                                 </div>
 
@@ -76,7 +102,7 @@ class AddNode extends Component {
                                         <div className="input-group-prepend">
                                             <div className="input-group-text">Batería</div>
                                         </div>
-                                        <input type="text" onChange={(e) => this.update("batery", e)} className="form-control" placeholder="Agregar la batería del nodo" />
+                                        <input type="text" onChange={(e) => this.update("batery", e)} value={this.state.batery} className="form-control" placeholder="Agregar la batería del nodo" />
                                     </div>
                                 </div>
 
@@ -88,7 +114,7 @@ class AddNode extends Component {
                                         <div className="input-group-prepend">
                                             <div className="input-group-text">Estado</div>
                                         </div>
-                                        <input type="text" onChange={(e) => this.update("operativeState", e)} className="form-control" placeholder="Agregar el estado del nodo" />
+                                        <input type="text" onChange={(e) => this.update("operativeState", e)} value={this.state.operativeState} className="form-control" placeholder="Agregar el estado del nodo" />
                                     </div>
                                 </div>
 
