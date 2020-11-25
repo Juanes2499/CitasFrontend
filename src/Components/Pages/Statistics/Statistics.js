@@ -12,34 +12,6 @@ class Statistics extends Component {
         this.state = {
             selectedNode: "",
             optionNodes: [],
-            graficar: false
-
-            ,
-            dataLine: {
-                labels: ["Monday", "February", "March", "April", "May", "June", "July", "Monday", "February", "March", "April", "May", "June", "July"],
-                datasets: [
-                    {
-                        label: "",
-                        fill: true,
-                        lineTension: 0.3,
-                        backgroundColor: "rgba(225, 204,230, .3)",
-                        borderColor: "rgb(205, 130, 158)",
-                        borderCapStyle: "butt",
-                        borderDashOffset: 0.0,
-                        borderJoinStyle: "miter",
-                        pointBorderColor: "rgb(205, 130,1 58)",
-                        pointBackgroundColor: "rgb(255, 255, 255)",
-                        pointBorderWidth: 10,
-                        pointHoverRadius: 5,
-                        pointHoverBackgroundColor: "rgb(0, 0, 0)",
-                        pointHoverBorderColor: "rgba(220, 220, 220,1)",
-                        pointHoverBorderWidth: 2,
-                        pointRadius: 1,
-                        pointHitRadius: 10,
-
-                    },
-                ]
-            },
             dataAmbientTemperature: { labels: [], datasets: [] },
             dataHumidity: { labels: [], datasets: [] },
             dataWindSpeed: { labels: [], datasets: [] },
@@ -77,6 +49,26 @@ class Statistics extends Component {
         this.setState({ [name]: e.target.value });
     };
     search() {
+        var data = {
+            label: "",
+            fill: true,
+            lineTension: 0.3,
+            backgroundColor: "rgba(225, 204,230, .3)",
+            borderColor: "rgb(205, 130, 158)",
+            borderCapStyle: "butt",
+            borderDashOffset: 0.0,
+            borderJoinStyle: "miter",
+            pointBorderColor: "rgb(205, 130,1 58)",
+            pointBackgroundColor: "rgb(255, 255, 255)",
+            pointBorderWidth: 10,
+            pointHoverRadius: 5,
+            pointHoverBackgroundColor: "rgb(0, 0, 0)",
+            pointHoverBorderColor: "rgba(220, 220, 220,1)",
+            pointHoverBorderWidth: 2,
+            pointRadius: 1,
+            pointHitRadius: 10,
+
+        }
         this.setState({
             dataAmbientTemperature: { labels: [], datasets: [] }, dataHumidity: { labels: [], datasets: [] },
             dataWindSpeed: { labels: [], datasets: [] }, dataRiverTemperature: { labels: [], datasets: [] },
@@ -115,13 +107,13 @@ class Statistics extends Component {
             console.log(tem);
 
             this.setState({
-                dataAmbientTemperature: { labels: date, datasets: [{ ...this.state.dataLine.datasets[0], data: tem }] },
-                dataHumidity: { labels: date, datasets: [{ ...this.state.dataLine.datasets[0], data: hum }] },
-                dataWindSpeed: { labels: date, datasets: [{ ...this.state.dataLine.datasets[0], data: velv }] },
-                dataRiverTemperature: { labels: date, datasets: [{ ...this.state.dataLine.datasets[0], data: tema }] },
-                dataRiverHeight: { labels: date, datasets: [{ ...this.state.dataLine.datasets[0], data: nagua }] },
-                dataFlow: { labels: date, datasets: [{ ...this.state.dataLine.datasets[0], data: flu }] },
-                dataCaudal: { labels: date, datasets: [{ ...this.state.dataLine.datasets[0], data: cau }] },
+                dataAmbientTemperature: { labels: date, datasets: [{ ...data, data: tem }] },
+                dataHumidity: { labels: date, datasets: [{ ...data, data: hum }] },
+                dataWindSpeed: { labels: date, datasets: [{ ...data, data: velv }] },
+                dataRiverTemperature: { labels: date, datasets: [{ ...data, data: tema }] },
+                dataRiverHeight: { labels: date, datasets: [{ ...data, data: nagua }] },
+                dataFlow: { labels: date, datasets: [{ ...data, data: flu }] },
+                dataCaudal: { labels: date, datasets: [{ ...data, data: cau }] },
 
             })
 
