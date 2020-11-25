@@ -34,19 +34,13 @@ class NodeConfig extends Component {
 
     putdata = () => {
 
-        console.log(this.state.node);
-        console.log(this.state.lat + this.state.long + this.state.operativestate)
+       
         var long = Number(this.state.long === 0 ? this.state.node.Longitud : this.state.long);
         var lat = Number(this.state.lat === 0 ? this.state.node.Latitud : this.state.lat);
-        var state = this.state.node.Estado;
-        console.log(lat);
-        console.log(long)
-        console.log(state);
-        console.log(this.state.operativestate);
+        var state = this.state.node.Estado;    
         var num = this.state.node.NumNodo;
         var batery = this.state.node.Bateria;
-        console.log(num);
-        console.log(batery);
+   
 
         this.httpInstance.put('/putnode', {
 
@@ -85,14 +79,11 @@ class NodeConfig extends Component {
     }
 
     search = () => {
-        console.log(this.state.selectedNode);
-        console.log(this.state.optionNodes);
 
         // this.setState({ nodes: this.state.selectedNode });
         var item = this.state.optionNodes.find(node => node.NumNodo == this.state.selectedNode);
-        console.log(item);
         var state = item.Estado;
-        console.log(state)
+      
         if (item) {
             this.setState({
                 node: {
@@ -106,7 +97,7 @@ class NodeConfig extends Component {
             })
             console.log(this.state.node)
         } else {
-            console.log("Dorime");
+            console.log("Falló la operación");
         }
         console.log(this.state.node.Estado)
     }
@@ -217,7 +208,7 @@ class NodeConfig extends Component {
                                                     <div className="input-group-prepend">
                                                         <div className="input-group-text">Estado</div>
                                                     </div>
-                                                    <input type="text" defaultValue={this.state.node.Estado ? "Desactivado" : "Activo"} className="form-control" placeholder="Agregar el estado del nodo" readOnly />
+                                                    <input type="text" value={!this.state.node.Estado ? "Desactivado" : "Activo"} className="form-control" placeholder="Agregar el estado del nodo" readOnly />
                                                 </div>
                                             </div>
                                         </form>

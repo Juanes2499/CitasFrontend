@@ -90,7 +90,7 @@ class Home extends Component {
                                 </div>
                             </Accordion>
                             <Accordion title="Estado del nodo" color="bg-primary">
-                                <div className="card p-2 m-0">
+                                <div className="card o-card-crit p-2 m-0">
                                     {this.state.nodes.map((node, i) => {
                                         return (
                                             <p key={i}>Estado del nodo {node.NumNodo} es: <span className={node.Estado === true ? "text-success" : "text-danger"}>{node.Estado ? "Activo" : "Apagado"} </span></p>

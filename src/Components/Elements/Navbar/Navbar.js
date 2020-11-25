@@ -10,7 +10,7 @@ const Navbar = () => {
 
     return (
         <nav className="navbar  sticky-top shadow-sm  navbar-expand-sm o-navbar ">
-            <a className="navbar-brand" href="/Login">
+            <a className="navbar-brand" href="/Dashboard/Home">
                 <img src={Logo} width="100" alt="Logo" />
             </a>
             <button
@@ -26,9 +26,9 @@ const Navbar = () => {
                     } navbar-collapse justify-content-lg-end`}
                 id="navbar-menu"
             >
-                <a className="nav-link o-navbar-links font-weight-bold" href="/HomePage">Inicio</a>
-                <a className="nav-link o-navbar-links font-weight-bold" href="/apiPage">Quienes somos?</a>
-                <a className="nav-link o-navbar-links font-weight-bold" href="/Login">Iniciar sesión</a>
+                <a className="nav-link o-navbar-links font-weight-bold" href="/HomePage">Información</a>
+                <a className="nav-link o-navbar-links font-weight-bold" href="/apiPage">API</a>
+                <a className="nav-link o-navbar-links font-weight-bold" href="/Dashboard/Home">Dashboard</a>
 
             </div>
         </nav>

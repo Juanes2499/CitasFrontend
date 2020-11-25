@@ -175,8 +175,8 @@ class SensorNode extends Component {
 
                                                 <p className="h6 font-weight-bold text-muted">Estado del nodo</p>
 
-                                                <div className={(node.operativestate === "Activo" ? "bg-success" : "bg-danger") + " col-auto p-0 d-flex text-white rounded justify-content-center"}>
-                                                    <p className="mt-1 mb-1">Nodo {node.operativestate}</p>
+                                                <div className={(node.operativestate ? "bg-success" : "bg-danger") + " col-auto p-0 d-flex text-white rounded justify-content-center"}>
+                                                    <p className="mt-1 mb-1">Nodo {node.operativestate ? "Activo" : "Desactivado"}</p>
                                                 </div>
                                             </div>
                                         </div>

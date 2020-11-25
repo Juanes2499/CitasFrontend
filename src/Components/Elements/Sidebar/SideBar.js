@@ -4,7 +4,6 @@ import {
   faMap,
   faWrench,
   faTachometerAlt,
-  faUserCircle,
   faPlus,
   faTh,
   faChartLine
@@ -26,19 +25,6 @@ const SideBar = ({ isOpen, toggle }) => {
       </div>
       <div className="side-menu">
         <div className="list-unstyled pb-3">
-          <NavLink className="mb-3" activeClassName="active" to="/Dashboard/User">
-            <div className=" o-sidebar-user">
-              <li tag={Link} to={"/Dashboard/User"}>
-
-                <button className="btn o-link-btn z-depth-0 font-weight-bold " >
-                  <FontAwesomeIcon icon={faUserCircle} className="mr-2 mb-0  h4" />
-              Nombre Usuario
-              </button>
-
-
-              </li>
-            </div>
-          </NavLink>
 
           <NavLink activeClassName="active" to="/Dashboard/Home">
             <div className="nav-item">
