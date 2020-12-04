@@ -4,6 +4,10 @@ import Loged from "../Pages/Loged/Dashboard";
 import HomePage from "../Pages/Login/HomePage";
 import apiPage from "../Pages/Login/apiPage";
 
+import Home from '../Pages/HomePage/Home';
+import MedicamentosHome from '../Pages/Medicamentos/MedicamentosHome';
+import DashboradUser from '../Pages/DashboardUser/DashboradUser';
+
 class Main extends Component {
 
 
@@ -13,12 +17,12 @@ class Main extends Component {
     return (
       <div className="o-container-main">
         <Switch>
+          <Route path="/Home" component={Home}/>
+          <Route path="/MedicamentosHome" component={MedicamentosHome}/>
+          <Route path="/DashboardUser" component={DashboradUser}/>
 
+          <Redirect to ="/Home"/>
           <Route path="/Dashboard" component={Loged} />
-          <Route path="/API" component={apiPage} />
-          <Route path="/HomePage" component={HomePage} />
-          <Redirect to="/Dashboard/Home" />
-
         </Switch>
       </div>
     );
